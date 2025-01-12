@@ -7,7 +7,7 @@ interface NavbarClientProperties {
 
 export default function NavbarClient(props: NavbarClientProperties) {
     return (
-        <div className={`bg-gray-800 w-full h-12 flex items-center`}>
+        <div className={`bg-gray-800 w-full h-12 flex items-center navbar select-none`}>
             <Link href={`/`} className={`ml-4 mr-10`}>
                 text.ai
             </Link>

@@ -2,27 +2,13 @@
 
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
 import React, {useEffect, useRef, useState} from "react";
-import {ContactMessages, GetMessageDateString} from "@/modules/ai/ContactMessages";
+import {ContactMessages} from "@/modules/ai/ContactMessages";
+import Message from "@/components/contacts/message";
 
 interface ClientSideContactMessagingProps {
     token: string | undefined;
     contactId: string;
     messages: ContactMessages[];
-}
-
-function renderStyledMessage(content: string) {
-    const regex = /\*([^*]+)\*/g;
-    const parts = content.split(regex);
-
-    return parts.map((part, index) =>
-        index % 2 === 1 ? (
-            <span key={index} className="text-gray-400">
-                {part}
-            </span>
-        ) : (
-            part
-        )
-    );
 }
 
 export default function ClientSideContactMessaging(props: ClientSideContactMessagingProps) {
@@ -38,6 +24,36 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
         if (scrollbar.current) {
             scrollbar.current.scrollTop = scrollbar.current.scrollHeight;
         }
+    }
+    
+    function changeMessage(index: number, newMessage: string) {
+        const newMessages = [...messages];
+        
+        const message = newMessages[index];
+        
+        fetch("/api/contacts/message/edit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                token: props.token,
+                message: message.content,
+                newMessage: newMessage,
+                contactId: props.contactId
+            })
+        }).then(async (response) => {
+            if (response.ok) {
+                
+                // Update the message
+                message.content = newMessage;
+                setMessages(newMessages);
+                
+            } else {
+                console.error("Message edit failed");
+            }
+        });
+        
     }
     
     function sendMessage() {
@@ -76,25 +92,7 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
             {/* Message List */}
             <div ref={scrollbar} className="flex-grow overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
                 {messages.map((message, index) => (
-                    <div
-                        key={index}
-                        className={`flex w-full mb-2 ease-in-out transition delay-100 hover:scale-[101%] ${
-                            message.from === props.contactId ? "justify-start" : "justify-end"
-                        }`}
-                    >
-                        <div
-                            className={`max-w-[70%] p-3 rounded-xl ease-in-out transition delay-100 ${
-                                message.from === props.contactId
-                                    ? "bg-gray-700 text-white rounded-bl-none hover:bg-gray-800"
-                                    : "bg-[#1e5d9c] text-white rounded-br-none hover:bg-[#1b548d]"
-                            }`}
-                        >
-                            <p className="text-sm">{renderStyledMessage(message.content)}</p>
-                            <p title={`Sent: ${message.time.toLocaleString()}`} className={`text-xs ${message.from === props.contactId ? "text-gray-400" : "text-slate-800"} mt-1 text-right select-none`}>
-                                {GetMessageDateString(message.time)}
-                            </p>
-                        </div>
-                    </div>
+                    <Message index={index} changeMessage={changeMessage} key={index} message={message} contactId={props.contactId} />
                 ))}
             </div>
 

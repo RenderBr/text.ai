@@ -29,3 +29,8 @@ body {
   background: var(--background);
   font-family: "Poppins", serif;
 }
+
+.navbar a:hover {
+    transition: 1s;
+    color: #3771d6;
+}
