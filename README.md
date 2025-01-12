@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# text.ai
+
+Welcome to **text.ai**, an AI-powered text messaging platform! Using text.ai, you can create custom AI chat personas to respond to text messages in a human-like manner. **This was built in a day, as a hobby project.**
+
+---
+
+## Features
+
+- **Create Custom AI Contacts**: Personalize your AI contacts by giving them a name and defining their characteristics. The more detailed you are, the better their responses will be.
+- **Powered by LLama 3.1 Lexi**: text.ai leverages the LLM model [LLama 3.1 Lexi](https://huggingface.co/Orenguteng/Llama-3.1-8B-Lexi-Uncensored-V2-GGUF) to deliver human-like responses.
+- **Unique Contact Images**: Generate contact images using the [PerfectDeliberate Anime](https://civitai.com/models/111274/perfectdeliberate-anime) model. The AI generates images based on the characteristics you provide, ensuring a personalized touch.
+- **User Privacy**: All images are visible only to you.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### How to Use text.ai
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+You can't yet. Unless you wanna figure it out yourself locally.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Contacts Page
+![Contacts Page](https://github.com/user-attachments/assets/91a6e801-f18f-4791-87f3-5d8dbe4b1353)
 
-## Learn More
+### Chat Example
+![Chat Example](https://github.com/user-attachments/assets/c7af6398-babc-48f9-8901-cbf78298ebf7)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Technology
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Programming Language**: [Typescript](https://www.typescriptlang.org/)
+  - **Runtime**: [Node.js](https://nodejs.org/en)
+- **AI Models**:
+  - [LLama 3.1 Lexi](https://huggingface.co/Orenguteng/Llama-3.1-8B-Lexi-Uncensored-V2-GGUF) for text generation.
+  - [PerfectDeliberate Anime](https://civitai.com/models/111274/perfectdeliberate-anime) for contact image generation.
+- **Full-stack web Framework**: [Next.js](https://nextjs.org/), a [React.js framework](https://react.dev/)
+- **CSS Framework**: [Tailwind CSS](https://tailwindcss.com/)
+- **Database**: [MongoDB](https://www.mongodb.com/).
+  - **ODM**: [Mongoose](https://mongoosejs.com/)
+- **Local LLM API**: [LM Studio](https://lmstudio.ai/)
+- **Local Stable Diffusion Web API**: [AUTOMATIC1111's SD WebUI](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+- **Authentication**: handled via [bcrypt](https://www.npmjs.com/package/bcrypt) and [JWTs](https://jwt.io/)
+- **Developer**: Built by [Average](https://github.com/RenderBr/) (a.k.a. `@rageave` on Discord).
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Developer Notes
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Installation instructions may be added in the future. For now, please enjoy the code.
+
+- **Discord**: `@rageave`
+- **GitHub**: [Average](https://github.com/RenderBr/)
+
+---
