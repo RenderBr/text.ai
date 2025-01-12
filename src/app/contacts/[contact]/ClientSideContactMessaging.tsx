@@ -90,7 +90,7 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
                             }`}
                         >
                             <p className="text-sm">{renderStyledMessage(message.content)}</p>
-                            <p className={`text-xs ${message.from === props.contactId ? "text-gray-400" : "text-slate-800"} mt-1 text-right select-none`}>
+                            <p title={`Sent: ${message.time.toLocaleString()}`} className={`text-xs ${message.from === props.contactId ? "text-gray-400" : "text-slate-800"} mt-1 text-right select-none`}>
                                 {GetMessageDateString(message.time)}
                             </p>
                         </div>
