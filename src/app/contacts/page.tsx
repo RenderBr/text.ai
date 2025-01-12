@@ -1,6 +1,6 @@
 "use server"
 
-import ContactCard from "@/components/contact";
+import ContactCard from "@/components/contacts/contact";
 import AddContactButton from "@/components/contacts/addButton";
 import UserTokenJwt from "@/modules/auth/UserTokenJwt";
 import {Contact} from "@/modules/db/schemas/Contact";
@@ -27,7 +27,7 @@ export default async function Page() {
         <div className={``}>
             { /* Heading */}
             <div className={`flex`}>
-                <h1 className={`text-4xl ml-2 mt-2 mb-4`}>Contacts</h1>
+                <h1 className={`text-4xl lg:text-6xl ml-2 mt-2 mb-4 font-bold select-none`}>Contacts</h1>
                 <div className={`ml-auto`}>
                     <AddContactButton token={user.token}/>
                 </div>

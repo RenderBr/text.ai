@@ -9,7 +9,7 @@ export default function Home() {
             bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:from-pink-600 hover:via-pink-700 hover:to-green-400
             `}>text.ai</h1>
             <hr className={`border-gray-500 mb-2`}/>
-            <p className={`text-gray-300 text-xl lg:text-2xl`}>Welcome to text.ai, the AI-powered text messaging platform. Using
+            <p className={`text-gray-300 text-xl lg:text-2xl select-none`}>Welcome to text.ai, the AI-powered text messaging platform. Using
                 this
                 platform, you can create custom AI chat personas to respond to text messages. Using the platform is
                 easy, simply sign up, head to the <Link className={`font-bold`} href={`/contacts`}>Contacts
