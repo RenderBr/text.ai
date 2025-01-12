@@ -3,12 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useRef } from "react";
+import RegenerateImageOption from "@/components/contacts/ options/regenerateImage";
 
 interface ContactProperties {
     name: string;
     avatar?: string;
     characteristics?: string[];
     id: string;
+    token: string | undefined;
 }
 
 export default function ContactCard(props: ContactProperties) {
@@ -73,13 +75,12 @@ export default function ContactCard(props: ContactProperties) {
                             <li className="hover:bg-gray-600 p-2 cursor-pointer rounded-t-lg">
                                 <Link href={`/contacts/${props.id}/edit`}>Edit Contact</Link>
                             </li>
+                            <RegenerateImageOption callback={showOptions} contactId={props.id} token={props.token} />
 {/*                            <li className="hover:bg-gray-600 p-2 cursor-pointer">Delete Contact</li>
                             <li className="hover:bg-gray-600 p-2 cursor-pointer rounded-b-lg">
                                 <button onClick={() => alert("Viewing details...")}>View Details</button>
                             </li>
-                            <li className="hover:bg-gray-600 p-2 cursor-pointer rounded-b-lg">
-                                Regenerate Image
-                            </li>*/}
+                            */}
                         </ul>
                     </div>
                 )}

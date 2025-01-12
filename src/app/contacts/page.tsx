@@ -37,7 +37,7 @@ export default async function Page() {
             <ul className={`flex flex-col gap-2`}>
                 {contacts.map(contact => {
                     return (
-                        <ContactCard key={contact.id} characteristics={contact.characteristics} avatar={contact.avatar} name={contact.name} id={contact.id}/>
+                        <ContactCard token={user.token} key={contact.id} characteristics={contact.characteristics} avatar={contact.avatar} name={contact.name} id={contact.id}/>
                     );
                 })}
             </ul>
