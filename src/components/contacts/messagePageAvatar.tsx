@@ -31,7 +31,7 @@ export default function MessagePageAvatar(props: MessagePageAvatarProperties) {
             }
             
             
-            <Image onClick={toggleImage} className={`w-12 h-12 lg:w-20 lg:h-20 border-2 rounded-lg mr-4 mb-4 hover:opacity-75`}
+            <Image onClick={toggleImage} className={`w-12 h-12 lg:w-20 lg:h-20 border-2 rounded-lg mr-4 hover:opacity-75`}
                    width={128} height={128}
                    alt={props.name}
                    src={props.url ?? "/images/avatars/default-avatar.png"}/>

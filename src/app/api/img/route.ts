@@ -45,6 +45,7 @@ export async function POST(request: Request) {
 
         const payload = {
             prompt: contact.characteristics?.join(", "),
+            negative_prompt: "bad quality, text, watermark",
             sampler_name: "DPM++ 2M",
             steps: 20
         };
