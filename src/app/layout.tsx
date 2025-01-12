@@ -31,7 +31,7 @@ export default async function RootLayout({
         <NavbarServer/>
 
         <div className={`flex justify-center mt-8 h-[calc(100vh-100px)]`}>
-            <div className={`bg-gray-900 p-4 rounded-2xl w-[calc(100vw-80px)] h-[calc(85vh)] mb-4`}>
+            <div className={`bg-gray-900 p-4 rounded-2xl w-[calc(100vw-80px)] h-[calc(85vh)] mb-4 shadow-2xl`}>
                 {children}
             </div>
         </div>
