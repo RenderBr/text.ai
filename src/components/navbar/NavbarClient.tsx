@@ -1,0 +1,42 @@
+import UserTokenJwt from "@/modules/auth/UserTokenJwt";
+import Link from "next/link";
+
+interface NavbarClientProperties {
+    user: UserTokenJwt | null
+}
+
+export default function NavbarClient(props: NavbarClientProperties) {
+    return (
+        <div className={`bg-gray-800 w-full h-12 flex items-center`}>
+            <Link href={`/`} className={`ml-4 mr-10`}>
+                text.ai
+            </Link>
+            <div className={`flex gap-10`}>
+                <Link href={`/contacts`}>
+                    Contacts
+                </Link>
+                {
+                    props.user && (
+                        <Link href={`/logout`}>
+                            Logout
+                        </Link>    
+                    )
+                }
+            </div>
+            {
+                props.user ? (
+                    <div className={`ml-auto mr-4`}>
+                        {props.user.username}
+                    </div>
+                ) : (
+                    <Link href={`/login`} className={`ml-auto mr-4`}>
+                        Login
+                    </Link>
+                )
+            }
+
+        </div>
+
+
+    )
+}
