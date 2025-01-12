@@ -3,20 +3,17 @@ import connect from "@/modules/db/db";
 import User from "@/modules/db/schemas/User";
 import {compare} from "bcrypt";
 import UserTokenJwt from "@/modules/auth/UserTokenJwt";
+import VerifyJsonBody from "@/modules/api-utilities/verify_json_body";
 
 export async function POST(request: NextRequest) {
     try {
-        let body;
-        try {
-            body = await request.json();
-        } catch (error) {
-            console.error("Failed to parse request body: ", error);
-            return NextResponse.json({error: "Failed to parse request body"}, {status: 400});
+        const bodyResult = await VerifyJsonBody(request);
+        
+        if (bodyResult instanceof NextResponse) {
+            return bodyResult;
         }
-
-        if (!body) {
-            return NextResponse.json({error: "Missing request body"}, {status: 400});
-        }
+        
+        const {body} = bodyResult;
 
         if (!body.username || !body.password) {
             return NextResponse.json({error: "Missing required fields"}, {status: 400});

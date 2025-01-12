@@ -1,40 +1,20 @@
 import {NextResponse} from "next/server";
-import UserTokenJwt from "@/modules/auth/UserTokenJwt";
 import connect from "@/modules/db/db";
 import {Contact} from "@/modules/db/schemas/Contact";
 import ai from "@/modules/ai/ai";
 import {Message} from "@/modules/db/schemas/Message";
+import VerifyAuthentication from "@/modules/api-utilities/verify_auth";
 
 export async function POST(request: Request){
     try {
 
-        let body;
-        try {
-            body = await request.json();
-        } catch {
-            return NextResponse.json({error: "Invalid JSON body"}, {status: 400});
+        const authResult = await VerifyAuthentication(request);
+
+        if (authResult instanceof NextResponse) {
+            return authResult;
         }
 
-        if (!body) {
-            return NextResponse.json({error: "Missing body"}, {status: 400});
-        }
-
-        if (!body.token) {
-            return NextResponse.json({error: "Missing token field"}, {status: 400});
-        }
-
-        if (!body.message) {
-            return NextResponse.json({error: "Missing message field"}, {status: 400});
-        }
-
-        const token = body.token;
-
-        // Verify the token
-        const user = new UserTokenJwt(token);
-
-        if (!user) {
-            return NextResponse.json({error: "Invalid token"}, {status: 401});
-        }
+        const {user, body} = authResult;
 
         if (!body.contactId) {
             return NextResponse.json({error: "Missing contactId field"}, {status: 400});

@@ -1,31 +1,16 @@
 import {NextResponse} from "next/server";
-import UserTokenJwt from "@/modules/auth/UserTokenJwt";
 import {Contact} from "@/modules/db/schemas/Contact";
 import connect from "@/modules/db/db";
+import VerifyAuthentication from "@/modules/api-utilities/verify_auth";
 
 export async function POST(request: Request){
-    let body;
-    try {
-        body = await request.json();
-    }catch {
-        return NextResponse.json({error: "Invalid JSON"}, {status: 400});
+    const authResult = await VerifyAuthentication(request);
+    
+    if (authResult instanceof NextResponse) {
+        return authResult;
     }
     
-    const token = body.token;
-    
-    if (!token) {
-        return NextResponse.json({error: "No token provided"}, {status: 400});
-    }
-    
-    if (!UserTokenJwt.verifyToken(token)) {
-        return NextResponse.json({error: "Invalid token"}, {status: 400});
-    }
-    
-    const user = new UserTokenJwt(token);
-    
-    if (!user) {
-        return NextResponse.json({error: "Invalid token"}, {status: 400});
-    }
+    const {user, body} = authResult;
     
     const contactName = body.contactName;
     
