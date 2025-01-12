@@ -39,6 +39,7 @@ You can't yet. Unless you wanna figure it out yourself locally.
   - [LLama 3.1 Lexi](https://huggingface.co/Orenguteng/Llama-3.1-8B-Lexi-Uncensored-V2-GGUF) for text generation.
   - [PerfectDeliberate Anime](https://civitai.com/models/111274/perfectdeliberate-anime) for contact image generation.
 - **Full-stack web Framework**: [Next.js](https://nextjs.org/), a [React.js framework](https://react.dev/)
+- **CSS Framework**: [Tailwind CSS](https://tailwindcss.com/)
 - **Database**: [MongoDB](https://www.mongodb.com/).
   - **ODM**: [Mongoose](https://mongoosejs.com/)
 - **Local LLM API**: [LM Studio](https://lmstudio.ai/)
