@@ -9,7 +9,7 @@ Welcome to **text.ai**, an AI-powered text messaging platform! Using text.ai, yo
 - **Create Custom AI Contacts**: Personalize your AI contacts by giving them a name and defining their characteristics. The more detailed you are, the better their responses will be.
 - **Powered by LLama 3.1 Lexi**: text.ai leverages the LLM model [LLama 3.1 Lexi](https://huggingface.co/Orenguteng/Llama-3.1-8B-Lexi-Uncensored-V2-GGUF) to deliver human-like responses.
 - **Unique Contact Images**: Generate contact images using the [PerfectDeliberate Anime](https://civitai.com/models/111274/perfectdeliberate-anime) model. The AI generates images based on the characteristics you provide, ensuring a personalized touch.
-- **User Privacy**: All images are visible only to you. Please provide appropriate characteristics, as inappropriate content will be removed, and accounts may be banned.
+- **User Privacy**: All images are visible only to you.
 
 ---
 
