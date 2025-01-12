@@ -3,9 +3,9 @@ import Link from "next/link";
 export default function Home() {
     return (
         <div className={`flex flex-col w-full h-full`}>
-            <h1 className={`justify-center self-center mb-2 text-4xl font-bold`}>text.ai</h1>
+            <h1 className={`justify-center self-center mb-2 text-8xl font-bold`}>text.ai</h1>
             <hr className={`border-gray-500 mb-2`}/>
-            <p className={`text-gray-300`}>Welcome to text.ai, the AI-powered text messaging platform. Using this
+            <p className={`text-gray-300 text-2xl`}>Welcome to text.ai, the AI-powered text messaging platform. Using this
                 platform, you can create custom AI chat personas to respond to text messages. Using the platform is
                 easy, simply sign up, head to the <Link className={`font-bold`} href={`/contacts`}>Contacts
                     page</Link> and start by adding your first AI contact.
