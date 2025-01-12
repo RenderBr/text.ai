@@ -34,7 +34,7 @@ export default async function Page() {
             </div>
 
             { /* Contacts */}
-            <ul>
+            <ul className={`flex flex-col gap-2`}>
                 {contacts.map(contact => {
                     return (
                         <ContactCard key={contact.id} characteristics={contact.characteristics} avatar={contact.avatar} name={contact.name} id={contact.id}/>
