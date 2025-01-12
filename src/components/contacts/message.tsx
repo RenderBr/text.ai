@@ -1,4 +1,4 @@
-import { ContactMessages, GetMessageDateString } from "@/modules/ai/ContactMessages";
+import {ContactMessages, GetRelativeTimeString, GetTimestamp} from "@/modules/ai/ContactMessages";
 import React, { useState } from "react";
 import { PencilSquareIcon } from "@heroicons/react/24/outline";
 
@@ -97,7 +97,7 @@ export default function Message(props: MessageProperties) {
                             <PencilSquareIcon className="h-4 w-4 inline-block mr-2" />
                         </div>
                     )}
-                    <p title={`Sent: ${props.message.time.toLocaleString()}`}>{GetMessageDateString(props.message.time)}</p>
+                    <p title={`Sent: ${GetTimestamp(props.message.time)}`}>{GetRelativeTimeString(props.message.time)}</p>
                 </div>
             </div>
         </div>

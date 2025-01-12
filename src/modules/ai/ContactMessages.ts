@@ -18,7 +18,7 @@ export function ConvertDBContactMessagesToContactMessages(dbContactMessages: IMe
     };
 }
 
-export function GetMessageDateString(date: Date): string {
+export function GetRelativeTimeString(date: Date): string {
     const now = new Date();
     const sentDate = new Date(date);
     const diffInSeconds = Math.floor((now.getTime() - sentDate.getTime()) / 1000);
@@ -40,4 +40,9 @@ export function GetMessageDateString(date: Date): string {
     }
 
     return 'just now';
+}
+
+export function GetTimestamp(date: Date): string {
+    const sentDate = new Date(date);
+    return `${sentDate.getFullYear()}-${sentDate.getMonth() + 1}-${sentDate.getDate()} ${sentDate.getHours()}:${sentDate.getMinutes()}`
 }

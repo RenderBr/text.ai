@@ -13,7 +13,7 @@ interface ClientSideContactMessagingProps {
 
 export default function ClientSideContactMessaging(props: ClientSideContactMessagingProps) {
     const [currentMsg, setCurrentMsg] = useState<string>("");
-    const [messages, setMessages] = useState<ContactMessages[]>(props.messages);
+    const [messages, setMessages] = useState<ContactMessages[]>(() => props.messages);
     const scrollbar = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -90,9 +90,9 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
     return (
         <div className="bg-gray-800 flex flex-col h-[86%] w-full rounded-lg p-6 mt-2">
             {/* Message List */}
-            <div ref={scrollbar} className="flex-grow overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
+            <div ref={scrollbar} className="lg:flex-grow container lg:max-h-[36rem] max-h-[20rem]  overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
                 {messages.map((message, index) => (
-                    <Message index={index} changeMessage={changeMessage} key={index} message={message} contactId={props.contactId} />
+                    <Message key={index} index={index} changeMessage={changeMessage} message={message} contactId={props.contactId} />
                 ))}
             </div>
 
@@ -103,13 +103,13 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
                     onChange={(event) => setCurrentMsg(event.target.value)}
                     placeholder="Send a message..."
                     onKeyDown={onKeyDown}
-                    className="flex-grow bg-gray-900 p-2 px-3 rounded-2xl outline-none text-white"
+                    className="flex-grow bg-gray-900 min-w-0 p-2 px-3 rounded-2xl outline-none text-white"
                 />
                 <button
                     onClick={sendMessage}
-                    className="bg-blue-500 p-2 rounded-3xl hover:bg-blue-700"
+                    className="flex-shrink-0 bg-blue-500 w-10 h-10 p-2 rounded-3xl hover:bg-blue-700"
                 >
-                    <PaperAirplaneIcon className="w-6 h-6 stroke-gray-50" />
+                    <PaperAirplaneIcon className="size-6 stroke-gray-50" />
                 </button>
             </div>
         </div>

@@ -2,6 +2,8 @@ import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
 import NavbarServer from "@/components/navbar/NavbarServer";
+import Head from "next/head";
+import {Meta} from "next/dist/lib/metadata/generate/meta";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -25,13 +27,16 @@ export default async function RootLayout({
 }>) {
     return (
         <html lang="en">
+        <Head>
+            <Meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </Head>
         <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen`}
+            className={`${geistSans.variable} ${geistMono.variable} antialiased max-h-screen`}
         >
         <NavbarServer/>
 
-        <div className={`flex justify-center mt-8 h-[calc(100vh-100px)]`}>
-            <div className={`bg-gray-900 p-4 rounded-2xl w-[calc(100vw-80px)] h-[calc(85vh)] mb-4 shadow-2xl`}>
+        <div className={`justify-center mt-8`}>
+            <div className={`bg-gray-900 container mx-auto p-4 sm:p-6 rounded-2xl lg:mb-8 shadow-2xl`}>
                 {children}
             </div>
         </div>

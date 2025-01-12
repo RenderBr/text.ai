@@ -52,7 +52,7 @@ export default async function Page({params}: { params: Promise<{ contact: string
     return (
         <div className={`flex flex-col h-full w-full pb-2`}>
             <div className={`flex w-full border-b border-gray-500 justify-center items-center mb-4`}>
-                <Image className={`w-20 h-20 border-2 rounded-lg mr-4 mb-4`} width={128} height={128}
+                <Image className={`w-12 h-12 lg:w-20 lg:h-20 border-2 rounded-lg mr-4 mb-4`} width={128} height={128}
                        alt={existingContact.name}
                        src={existingContact.avatar ?? "/images/avatars/default-avatar.png"}/>
                 <h1 className={`text-2xl font-bold ml-2 mt-2`}>{existingContact.name}</h1>

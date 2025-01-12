@@ -3,13 +3,13 @@ import Link from "next/link";
 export default function Home() {
     return (
         <div className={`flex flex-col w-full h-full`}>
-            <h1 className={`justify-center self-center mb-2 text-8xl font-bold subpixel-antialiased shadow-sm select-none
+            <h1 className={`justify-center self-center mb-2 text-6xl lg:text-8xl font-bold subpixel-antialiased shadow-sm select-none
             ease-in-out transition duration-500 transform hover:scale-150 
             text-transparent bg-clip-text 
             bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 hover:from-pink-600 hover:via-pink-700 hover:to-green-400
             `}>text.ai</h1>
             <hr className={`border-gray-500 mb-2`}/>
-            <p className={`text-gray-300 text-2xl`}>Welcome to text.ai, the AI-powered text messaging platform. Using
+            <p className={`text-gray-300 text-xl lg:text-2xl`}>Welcome to text.ai, the AI-powered text messaging platform. Using
                 this
                 platform, you can create custom AI chat personas to respond to text messages. Using the platform is
                 easy, simply sign up, head to the <Link className={`font-bold`} href={`/contacts`}>Contacts
@@ -36,8 +36,9 @@ export default function Home() {
 
                 <br/><br/>
 
-                text.ai is a project developed by <Link className={`font-bold transition ease-in-out duration-500 hover:text-blue-500`}
-                                                        href={`https://github.com/RenderBr/`}>Average</Link> or <code
+                text.ai is a project developed by <Link
+                    className={`font-bold transition ease-in-out duration-500 hover:text-blue-500`}
+                    href={`https://github.com/RenderBr/`}>Average</Link> or <code
                     className={`bg-slate-950 px-1 py-2 transition ease-in-out duration-500 hover:text-blue-200`}>@rageave</code> on
                 Discord. If you come across any issues, please report them to me on Discord or GitHub. I hope you have
                 fun using this platform!
