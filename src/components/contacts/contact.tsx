@@ -40,6 +40,13 @@ export default function ContactCard(props: ContactProperties) {
         window.location.href = `/contacts/${props.id}`;
     }
 
+    function goToEditContact(event: React.MouseEvent) {
+        event.preventDefault();
+        event.stopPropagation();
+        
+        window.location.href = `/contacts/${props.id}/edit`;
+    }
+
     return (
         <li
             className="ml-4 select-none bg-gray-700 mr-4 p-4 rounded-2xl transition-all ease-in-out hover:scale-[101%] hover:bg-gray-800 delay-200 shadow-2xl"
@@ -72,8 +79,8 @@ export default function ContactCard(props: ContactProperties) {
                         className="absolute right-4 top-[75%] border-gray-700 border bg-gray-800 text-white rounded-lg shadow-lg w-48 z-10"
                     >
                         <ul>
-                            <li className="hover:bg-gray-600 p-2 cursor-pointer rounded-t-lg">
-                                <Link href={`/contacts/${props.id}/edit`}>Edit Contact</Link>
+                            <li onClick={goToEditContact} className="hover:bg-gray-600 p-2 cursor-pointer rounded-t-lg">
+                                Edit Contact
                             </li>
                             <RegenerateImageOption callback={showOptions} contactId={props.id} token={props.token} />
 {/*                            <li className="hover:bg-gray-600 p-2 cursor-pointer">Delete Contact</li>
