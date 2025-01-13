@@ -60,7 +60,7 @@ export default async function Page({params}: { params: Promise<{ contact: string
                 </div>
             </div>
 
-            <ClientSideContactMessaging messages={messages} contactId={existingContact.id} token={user.token}/>
+            <ClientSideContactMessaging contactName={existingContact.name} messages={messages} contactId={existingContact.id} token={user.token}/>
         </div>
     );
 

@@ -80,12 +80,14 @@ export default function Message(props: MessageProperties) {
                         value={editedMessage}
                         onChange={handleInputChange}
                         onKeyDown={handleKeyDown}
-                        className="w-fit bg-gray-800 text-white p-2 rounded-md"
+                        className="w-full bg-gray-800 text-white p-2 rounded-md resize-none"
                         autoFocus
+                        cols={100}
+                        rows={5}
                         onBlur={stopEditing}
                     />
                 ) : (
-                    <p className="text-sm">{renderStyledMessage(editedMessage)}</p>
+                    <p className="text-sm select-none">{renderStyledMessage(editedMessage)}</p>
                 )}
                 <div
                     className={`text-xs flex justify-end ${

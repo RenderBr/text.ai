@@ -9,6 +9,7 @@ interface ClientSideContactMessagingProps {
     token: string | undefined;
     contactId: string;
     messages: ContactMessages[];
+    contactName: string;
 }
 
 export default function ClientSideContactMessaging(props: ClientSideContactMessagingProps) {
@@ -109,7 +110,7 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
                     <Message key={index} index={index} changeMessage={changeMessage} message={message} contactId={props.contactId} />
                 ))}
                 {isTyping && (
-                    <div className="text-gray-400 italic mt-2">The contact is typing...</div>
+                    <div className="text-gray-400 italic mt-2">{props.contactName} is typing...</div>
                 )}
             </div>
 

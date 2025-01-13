@@ -21,7 +21,7 @@ export class AiModule {
                 messages: [
                     {
                         role: "system",
-                        content: `You are pretending to be a human being named ${aiName}. Always provide natural, and human-like responses.${
+                        content: `You are pretending to be a human being named ${aiName}. Always provide natural, and human-like non-repetitive responses.${
                             characteristics.length > 0 ? ` The user has these characteristics: ${characteristics.join(", ")}. Given these characteristics,
                             respond in a way that would fit these characteristics. Please text in the style at which would match these, for example, perhaps
                             if the character is 'shy', type all in lowercase.` : ""
