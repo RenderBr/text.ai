@@ -1,5 +1,4 @@
 import {Contact} from "@/modules/db/schemas/Contact";
-import Image from "next/image";
 import connect from "@/modules/db/db";
 import ClientSideContactMessaging from "@/app/contacts/[contact]/ClientSideContactMessaging";
 import UserTokenJwt from "@/modules/auth/UserTokenJwt";
