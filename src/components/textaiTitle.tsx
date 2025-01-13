@@ -28,13 +28,40 @@ export default function TextAITitle() {
         if(clicks >= 20){
             setTitle('stop clicking me')
         }
+
+        if (clicks == 20){
+            titleRef.current?.classList.remove('lg:text-2xl')
+            titleRef.current?.classList.remove('text-xl')
+
+            titleRef.current?.classList.add('lg:text-lg')
+            titleRef.current?.classList.add('text-sm')
+
+        }
         
         if(clicks >= 30){
             setTitle('seriously, stop clicking me')
         }
         
+        
+        if (clicks == 30){
+            titleRef.current?.classList.remove('lg:text-lg')
+            titleRef.current?.classList.remove('text-sm')
+
+            titleRef.current?.classList.add('lg:text-sm')
+            titleRef.current?.classList.add('text-xs')
+        }
+
+        
         if(clicks >= 40){
             setTitle('do you ever feel')
+        }
+        
+        if (clicks == 40){
+            titleRef.current?.classList.remove('lg:text-sm')
+            titleRef.current?.classList.remove('text-xs')
+
+            titleRef.current?.classList.add('lg:text-xs')
+            titleRef.current?.classList.add('text-xs')
         }
         
         if(clicks >= 50){
