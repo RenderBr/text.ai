@@ -54,7 +54,7 @@ export default async function Page({params}: { params: Promise<{ contact: string
         <div className={`flex flex-col h-full w-full pb-2`}>
             <div className={`flex w-full justify-center items-center mb-4`}>
                 <MessagePageAvatar url={existingContact.avatar} name={existingContact.name} />
-                <h1 className={`text-2xl lg:text-6xl font-bold ml-2 mt-2`}>{existingContact.name}</h1>
+                <h1 className={`text-2xl lg:text-6xl font-bold ml-2 mt-2 select-none`}>{existingContact.name}</h1>
                 <div className={`ml-auto`}>
                     <button className={`bg-red-500 rounded-lg p-2 text-white`}>Delete</button>
                 </div>

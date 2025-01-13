@@ -36,8 +36,8 @@ export default function ClientSideLogin(){
     }
 
     return (
-      <div className={`flex flex-col h-full`}>
-        <h1 className={`text-6xl subpixel-antialiased self-center`}>Login</h1>
+      <div className={`flex flex-col h-full gap-4`}>
+        <h1 className={`text-6xl subpixel-antialiased self-center select-none font-bold`}>Login</h1>
         <form className={`self-center justify-center flex flex-grow flex-col gap-2`} onSubmit={onSubmit}>
             <input className={`bg-gray-800 border-none rounded-xl`} name={`username`} type="text" placeholder="Username" />
             <input className={`bg-gray-800 border-none rounded-xl`} name={`password`} type="password" placeholder="Password" />
