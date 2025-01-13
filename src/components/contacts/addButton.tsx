@@ -19,7 +19,6 @@ export default function AddContactButton(props: AddContactButtonProperties) {
         setIsModalOpen(!isModalOpen);
         
         // reload page
-        window.location.reload()
     }
 
     if (props.token === undefined) {
@@ -53,6 +52,10 @@ export default function AddContactButton(props: AddContactButtonProperties) {
                     setIsModalOpen(false);
                     setTags([]);
                     setCurrentTag("");
+                    
+                    // reload page
+                    window.location.reload();
+                    
                 } else {
                     console.error("Failed to add contact");
                 }
@@ -60,6 +63,7 @@ export default function AddContactButton(props: AddContactButtonProperties) {
                 console.error("Failed to add contact");
             }
         });
+        
     }
 
     function handleTagInputChange(event: React.ChangeEvent<HTMLInputElement>) {

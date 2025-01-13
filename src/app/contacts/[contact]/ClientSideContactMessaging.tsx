@@ -105,7 +105,7 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
     return (
         <div className="bg-gray-800 flex flex-col h-[86%] w-full rounded-lg p-6 mt-2">
             {/* Message List */}
-            <div ref={scrollbar} className="lg:flex-grow container lg:max-h-[34rem] max-h-[20rem] overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
+            <div ref={scrollbar} className="lg:flex-grow container lg:min-h-[34rem] lg:max-h-[34rem] min-h-[20rem] max-h-[20rem] overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
                 {messages.map((message, index) => (
                     <Message key={index} index={index} changeMessage={changeMessage} message={message} contactId={props.contactId} />
                 ))}

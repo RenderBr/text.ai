@@ -67,6 +67,10 @@ export default async function Page() {
                         id={contact._id.toString()}
                     />
                 ))}
+
+                {sortedContacts.length === 0 && (
+                    <h2 className={`text-2xl font-bold text-gray-400 self-center select-none`}>You have no contacts yet.</h2>
+                )}
             </ul>
         </div>
     );
