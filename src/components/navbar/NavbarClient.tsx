@@ -32,9 +32,14 @@ export default function NavbarClient(props: NavbarClientProperties) {
                         {props.user.username}
                     </div>
                 ) : (
-                    <Link href={`/login`} className={`ml-auto mr-4`}>
-                        Login
-                    </Link>
+                    <>
+                        <Link href={`/login`} className={`ml-auto mr-4`}>
+                            Login
+                        </Link>
+                            <Link href={`/register`} className={`mr-4 bg-blue-600 p-2 px-3 rounded-3xl`}>
+                                Register
+                            </Link>
+                    </>
                 )
             }
 

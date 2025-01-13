@@ -12,7 +12,7 @@ export async function POST(request: Request) {
             return bodyResult;
         }
         
-        const {body} = bodyResult;
+        const body = bodyResult;
 
         if (!body.username || !body.password || !body.email) {
             return NextResponse.json({error: "Missing required fields"}, {status: 400});

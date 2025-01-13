@@ -4,6 +4,7 @@ import {Contact} from "@/modules/db/schemas/Contact";
 import ai from "@/modules/ai/ai";
 import {Message} from "@/modules/db/schemas/Message";
 import VerifyAuthentication from "@/modules/api-utilities/verify_auth";
+import {ConvertDBContactMessagesToContactMessages} from "@/modules/ai/ContactMessages";
 
 export async function POST(request: Request){
     try {
@@ -66,13 +67,25 @@ export async function POST(request: Request){
         });
 
         await aiMessage.save();
-
-        const newMessageHistory = body.messageHistory;
         
-        newMessageHistory.push({content: body.message, from: user.username, to: contact.id, time: new Date()});
-        newMessageHistory.push({content: aiResponse.choices[0].message.content, from: contact.id, to: user.username, time: new Date()});
+        const currentMessagesFromDatabase = await Message.find({to: contact.id});
+        currentMessagesFromDatabase.push(...await Message.find({from: contact.id}));
         
-        return NextResponse.json({success: true, message: message, aiMessage: aiMessage, messageHistory: newMessageHistory});
+        currentMessagesFromDatabase.sort((a, b) => {
+            if (a.time < b.time) {
+                return -1;
+            }
+            if (a.time > b.time) {
+                return 1;
+            }
+            return 0;
+        });
+        
+        const currentMessageHistory = currentMessagesFromDatabase.map(message => {
+            return ConvertDBContactMessagesToContactMessages(message);
+        });
+        
+        return NextResponse.json({success: true, message: message, aiMessage: aiMessage, messageHistory: currentMessageHistory});
     }catch (e) {
         console.log(e);
         return NextResponse.json({error: "Internal server error"}, {status: 500});
