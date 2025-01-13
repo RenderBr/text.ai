@@ -1,8 +1,8 @@
 "use client";
 
 import { PaperAirplaneIcon } from "@heroicons/react/24/outline";
-import React, {useEffect, useRef, useState} from "react";
-import {ContactMessages} from "@/modules/ai/ContactMessages";
+import React, { useEffect, useRef, useState } from "react";
+import { ContactMessages } from "@/modules/ai/ContactMessages";
 import Message from "@/components/contacts/message";
 
 interface ClientSideContactMessagingProps {
@@ -14,23 +14,24 @@ interface ClientSideContactMessagingProps {
 export default function ClientSideContactMessaging(props: ClientSideContactMessagingProps) {
     const [currentMsg, setCurrentMsg] = useState<string>("");
     const [messages, setMessages] = useState<ContactMessages[]>(() => props.messages);
+    const [isTyping, setIsTyping] = useState<boolean>(false);
     const scrollbar = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         scrollDown();
     }, [messages]);
-    
-    function scrollDown(){
+
+    function scrollDown() {
         if (scrollbar.current) {
             scrollbar.current.scrollTop = scrollbar.current.scrollHeight;
         }
     }
-    
+
     function changeMessage(index: number, newMessage: string) {
         const newMessages = [...messages];
-        
+
         const message = newMessages[index];
-        
+
         fetch("/api/contacts/message/edit", {
             method: "POST",
             headers: {
@@ -44,19 +45,29 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
             })
         }).then(async (response) => {
             if (response.ok) {
-                
-                // Update the message
                 message.content = newMessage;
                 setMessages(newMessages);
-                
             } else {
                 console.error("Message edit failed");
             }
         });
-        
     }
-    
+
     function sendMessage() {
+        const userMessage = {
+            content: currentMsg,
+            read: true,
+            from: "user",
+            time: new Date(),
+            to: props.contactId
+        };
+
+        // Add user message to state
+        setMessages((prev) => [...prev, userMessage]);
+
+        // Show typing indicator
+        setIsTyping(true);
+
         fetch("/api/contacts/message", {
             method: "POST",
             headers: {
@@ -75,6 +86,9 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
             } else {
                 console.error("Message failed");
             }
+        }).finally(() => {
+            // Remove typing indicator
+            setIsTyping(false);
         });
 
         setCurrentMsg("");
@@ -90,10 +104,13 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
     return (
         <div className="bg-gray-800 flex flex-col h-[86%] w-full rounded-lg p-6 mt-2">
             {/* Message List */}
-            <div ref={scrollbar} className="lg:flex-grow container lg:max-h-[36rem] max-h-[20rem]  overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
+            <div ref={scrollbar} className="lg:flex-grow container lg:max-h-[36rem] max-h-[20rem] overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
                 {messages.map((message, index) => (
                     <Message key={index} index={index} changeMessage={changeMessage} message={message} contactId={props.contactId} />
                 ))}
+                {isTyping && (
+                    <div className="text-gray-400 italic mt-2">The contact is typing...</div>
+                )}
             </div>
 
             {/* Input and Send Button */}
