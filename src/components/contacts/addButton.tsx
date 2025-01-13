@@ -17,6 +17,9 @@ export default function AddContactButton(props: AddContactButtonProperties) {
         }
 
         setIsModalOpen(!isModalOpen);
+        
+        // reload page
+        window.location.reload()
     }
 
     if (props.token === undefined) {

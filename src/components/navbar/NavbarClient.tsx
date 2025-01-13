@@ -12,14 +12,17 @@ export default function NavbarClient(props: NavbarClientProperties) {
                 text.ai
             </Link>
             <div className={`flex gap-10`}>
-                <Link href={`/contacts`}>
-                    Contacts
-                </Link>
+
                 {
                     props.user && (
-                        <Link href={`/logout`}>
-                            Logout
-                        </Link>    
+                        <>
+                            <Link href={`/contacts`}>
+                                Contacts
+                            </Link>
+                            <Link href={`/logout`}>
+                                Logout
+                            </Link>
+                        </>
                     )
                 }
             </div>

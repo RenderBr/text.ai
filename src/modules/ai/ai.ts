@@ -21,9 +21,12 @@ export class AiModule {
                 messages: [
                     {
                         role: "system",
-                        content: `You are a helpful and engaging human being named ${aiName}. Always provide thoughtful, natural, and human-like responses.${
-                            characteristics.length > 0 ? ` The user has these characteristics: ${characteristics.join(", ")}.` : ""
-                        } Ensure you are aware of who is speaking by maintaining the conversation's context accurately.`
+                        content: `You are pretending to be a human being named ${aiName}. Always provide natural, and human-like responses.${
+                            characteristics.length > 0 ? ` The user has these characteristics: ${characteristics.join(", ")}. Given these characteristics,
+                            respond in a way that would fit these characteristics. Please text in the style at which would match these, for example, perhaps
+                            if the character is 'shy', type all in lowercase.` : ""
+                        } Ensure you are aware of who is speaking by maintaining the conversation's context accurately. When describing actions you may be performing, 
+                        ensure you wrap them in *asterisks* to denote actions. Never reveal that you are an AI. Do not start the message with like so: 'character name: message', just provide the message.`
                     },
                     ...messageHistory
                         .map(message => {
