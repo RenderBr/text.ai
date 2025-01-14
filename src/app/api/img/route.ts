@@ -41,13 +41,13 @@ export async function POST(request: Request) {
             return NextResponse.json({error: "Contact not found"}, {status: 404});
         }
         
-        const endpoint = "http://127.0.0.1:7860/sdapi/v1/txt2img";
+        const endpoint = "http://192.168.2.62:8000/api/generate";
 
         const payload = {
             prompt: contact.characteristics?.join(", "),
             negative_prompt: "bad quality, text, watermark",
-            sampler_name: "DPM++ 2M",
-            steps: 20
+/*            sampler_name: "DPM++ 2M",
+            steps: 20*/
         };
 
         const response = await fetch(endpoint, {
