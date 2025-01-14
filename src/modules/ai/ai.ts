@@ -2,7 +2,7 @@ import {ChatCompletion} from "@/modules/ai/ChatCompletion";
 import {ContactMessages} from "@/modules/ai/ContactMessages";
 
 export class AiModule {
-    private endpoint: string = "http://localhost:1234/v1/";
+    private endpoint: string = "http://192.168.2.62:11434/";
 
     public async getResponse(
         message: string,
@@ -17,7 +17,7 @@ export class AiModule {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama-3.1-8b-lexi-uncensored-v2",
+                model: "llama-3.1",
                 messages: [
                     {
                         role: "system",
