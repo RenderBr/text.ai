@@ -4,6 +4,7 @@ import ContactImage from "@/modules/db/schemas/ContactImage";
 import connect from "@/modules/db/db";
 import {Contact} from "@/modules/db/schemas/Contact";
 import VerifyAuthentication from "@/modules/api-utilities/verify_auth";
+import path from "node:path";
 
 export async function POST(request: Request) {
     try {
@@ -66,8 +67,10 @@ export async function POST(request: Request) {
         const buffer = Buffer.from(base64Image, 'base64');
         
         // create new folder with the contact id
-        if (!fs.existsSync(`C:\\Users\\julia\\WebstormProjects\\text_ai\\public\\images\\gens\\${contactId}`)){
-            fs.mkdirSync(`C:\\Users\\julia\\WebstormProjects\\text_ai\\public\\images\\gens\\${contactId}`);
+        const imagesDir = path.join(process.cwd(), "public", "images", "gens", contactId);
+
+        if (!fs.existsSync(imagesDir)) {
+            fs.mkdirSync(imagesDir, { recursive: true });
         }
         
         const image = await ContactImage.create({
@@ -79,7 +82,8 @@ export async function POST(request: Request) {
         await image.save();
 
         // save to file
-        fs.writeFileSync(`C:\\Users\\julia\\WebstormProjects\\text_ai\\public\\images\\gens\\${contactId}\\${image.id}.png`, buffer);
+        const imagePath = path.join(imagesDir, `${image.id}.png`);
+        fs.writeFileSync(imagePath, buffer);
         
         // update image field
         image.url = `/images/gens/${contactId}/${image.id}.png`;
