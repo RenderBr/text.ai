@@ -11,7 +11,7 @@ export class AiModule {
         characteristics: string[],
         aiName: string
     ): Promise<ChatCompletion | undefined> {
-        const response = await fetch(`${this.endpoint}chat/completions`, {
+        const response = await fetch(`${this.endpoint}api/chat`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
