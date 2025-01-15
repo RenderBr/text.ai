@@ -4,19 +4,13 @@ export interface ChatCompletion {
     object: string;
     created: Date;
     model: string;
-    choices: Choice[];
+    message: Message
     usage: {
         prompt_tokens: number;
         completion_tokens: number;
         total_tokens: number;
     },
     system_fingerprint: string;
-}
-
-interface Choice {
-    index: number;
-    message: Message;
-    finish_reason: string;
 }
 
 interface Message {

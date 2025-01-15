@@ -59,7 +59,7 @@ export async function POST(request: Request){
 
         // save the ai response
         const aiMessage = await Message.create({
-            content: aiResponse?.choices[0].message.content,
+            content: aiResponse?.message.content,
             to: user.username,
             from: contact._id,
             read: false,
