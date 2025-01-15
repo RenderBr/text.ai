@@ -17,7 +17,7 @@ export class AiModule {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "llama-3.1",
+                model: "llama3.1",
                 messages: [
                     {
                         role: "system",
@@ -53,7 +53,7 @@ export class AiModule {
             console.error("Failed to fetch response", {
                 status: response.status,
                 statusText: response.statusText,
-                url: `${this.endpoint}chat/completions`
+                url: `${this.endpoint}api/chat`
             });
             return undefined;
         }
