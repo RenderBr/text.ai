@@ -1,6 +1,8 @@
-# text.ai
+# [text.ai](https://textai.rageave.xyz/)
 
 Welcome to **text.ai**, an AI-powered text messaging platform! Using text.ai, you can create custom AI chat personas to respond to text messages in a human-like manner. **This was built in a day, as a hobby project.**
+
+**Text.AI** is now live, for free! Click [here](https://textai.rageave.xyz/) to visit the site. Please keep in mind, the image model has been degraded and it is running on slower generation hardware than our testing environment. Responses and image generation may be slow.
 
 ---
 
