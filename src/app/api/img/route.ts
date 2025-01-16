@@ -1,10 +1,8 @@
-import * as fs from "node:fs";
 import {NextResponse} from "next/server";
 import ContactImage from "@/modules/db/schemas/ContactImage";
 import connect from "@/modules/db/db";
 import {Contact} from "@/modules/db/schemas/Contact";
 import VerifyAuthentication from "@/modules/api-utilities/verify_auth";
-import path from "node:path";
 
 export async function POST(request: Request) {
     try {
@@ -42,13 +40,13 @@ export async function POST(request: Request) {
             return NextResponse.json({error: "Contact not found"}, {status: 404});
         }
         
-        const endpoint = "http://127.0.0.1:7860/sdapi/v1/txt2img";
+        const endpoint = "http://192.168.2.62:8000/api/generate";
 
         const payload = {
             prompt: contact.characteristics?.join(", "),
             negative_prompt: "bad quality, text, watermark",
-            sampler_name: "DPM++ 2M",
-            steps: 20
+/*            sampler_name: "DPM++ 2M",
+            steps: 20*/
         };
 
         const response = await fetch(endpoint, {
@@ -60,18 +58,9 @@ export async function POST(request: Request) {
         });
 
         const data = await response.json();
-
+        
         // save to file with base 64 image on data['images'][0]
         const base64Image = data['images'][0];
-
-        const buffer = Buffer.from(base64Image, 'base64');
-        
-        // create new folder with the contact id
-        const imagesDir = path.join(process.cwd(), "public", "images", "gens", contactId);
-
-        if (!fs.existsSync(imagesDir)) {
-            fs.mkdirSync(imagesDir, { recursive: true });
-        }
         
         const image = await ContactImage.create({
             contactId: contactId,
@@ -81,12 +70,32 @@ export async function POST(request: Request) {
         
         await image.save();
 
-        // save to file
-        const imagePath = path.join(imagesDir, `${image.id}.png`);
-        fs.writeFileSync(imagePath, buffer);
+        const imageEndpoint = `${process.env.IMG_STORAGE_URL}/img`;
+        
+        // save to remote server
+        const imagePayload = {
+            auth_token: process.env.IMG_STORAGE_TOKEN,
+            image: base64Image,
+        };
+        
+        const imageResponse = await fetch(imageEndpoint, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(imagePayload),
+        });
+        
+        if (!imageResponse.ok) {
+            return NextResponse.json({error: "Failed to generate image"}, {status: 500});
+        }
+        
+        const image_data = await imageResponse.json();
+        
+        const fileName = image_data['fileName'];
         
         // update image field
-        image.url = `/images/gens/${contactId}/${image.id}.png`;
+        image.url = `${process.env.IMG_STORAGE_URL}/images/${fileName}`;
         
         await image.save();
         
