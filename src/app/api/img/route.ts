@@ -75,7 +75,7 @@ export async function POST(request: Request) {
         // save to remote server
         const imagePayload = {
             auth_token: process.env.IMG_STORAGE_TOKEN,
-            image: base64Image,
+            base64: base64Image,
         };
         
         const imageResponse = await fetch(imageEndpoint, {
