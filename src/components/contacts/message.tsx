@@ -1,11 +1,12 @@
 import {ContactMessages, GetRelativeTimeString, GetTimestamp} from "@/modules/ai/ContactMessages";
-import React, { useState } from "react";
-import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import React, {useState} from "react";
+import {PencilSquareIcon, TrashIcon} from "@heroicons/react/24/outline";
 
 interface MessageProperties {
     message: ContactMessages;
     contactId: string;
     changeMessage: (index: number, newMessage: string) => void;
+    deleteMessage: (index: number) => void;
     index: number;
 }
 
@@ -47,6 +48,10 @@ export default function Message(props: MessageProperties) {
 
     function handleInputChange(event: React.ChangeEvent<HTMLTextAreaElement>) {
         setEditedMessage(event.target.value);
+    }
+    
+    function deleteMessage() {
+        props.deleteMessage(props.index);
     }
 
     function handleKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
@@ -95,9 +100,15 @@ export default function Message(props: MessageProperties) {
                     } mt-1 text-right select-none`}
                 >
                     {showEditor && !isEditing && (
-                        <div title={`Edit message`} onClick={startEditing} className="cursor-pointer">
-                            <PencilSquareIcon className="h-4 w-4 inline-block mr-2" />
-                        </div>
+                        <>
+                            <div title={`Edit message`} onClick={startEditing} className="cursor-pointer">
+                                <PencilSquareIcon className="h-4 w-4 inline-block mr-2"/>
+                            </div>
+
+                            <div title={`Delete message`} onClick={deleteMessage} className="cursor-pointer">
+                                <TrashIcon className="h-4 w-4 inline-block mr-2"/>
+                            </div>
+                        </>
                     )}
                     <p title={`Sent: ${GetTimestamp(props.message.time)}`}>{GetRelativeTimeString(props.message.time)}</p>
                 </div>

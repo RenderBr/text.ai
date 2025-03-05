@@ -6,6 +6,10 @@ import {Message} from "@/modules/db/schemas/Message";
 import VerifyAuthentication from "@/modules/api-utilities/verify_auth";
 import {ConvertDBContactMessagesToContactMessages} from "@/modules/ai/ContactMessages";
 
+function removeThinkTags(text:string) {
+    return text.replace(/[`\s]*[\[\<]think[\>\]](.*?)[\[\<]\/think[\>\]][`\s]*|^[`\s]*([\[\<]thinking[\>\]][`\s]*.*)$/ims, '').trim();
+}
+
 export async function POST(request: Request){
     try {
 
@@ -52,14 +56,15 @@ export async function POST(request: Request){
         // ai response
         const aiResponse = await ai.getResponse(`${user.username}: ${body.message}`, body.messageHistory, contact.id, contact.characteristics ?? [], contact.name);
 
-
         if (!aiResponse) {
             return NextResponse.json({error: "AI response failure. Contact an admin."}, {status: 500});
         }
 
+        const sanitizedAiResponse = removeThinkTags(aiResponse?.choices[0].message.content);
+        
         // save the ai response
         const aiMessage = await Message.create({
-            content: aiResponse?.choices[0].message.content,
+            content: sanitizedAiResponse,
             to: user.username,
             from: contact._id,
             read: false,

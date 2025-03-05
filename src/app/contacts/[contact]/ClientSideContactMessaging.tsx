@@ -95,6 +95,28 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
         setCurrentMsg("");
     }
 
+    function deleteMessage(index: number) {
+        const message = messages[index];
+        
+        fetch("/api/contacts/message/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                token: props.token,
+                message: message.content,
+                contactId: props.contactId
+            })
+        }).then(async (response) => {
+            if (response.ok) {
+                setMessages((prev) => prev.filter((_, i) => i !== index));
+            } else {
+                console.error("Message delete failed");
+            }
+        });
+    }
+
     function onKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
         if (event.key === "Enter") {
             event.preventDefault();
@@ -102,12 +124,14 @@ export default function ClientSideContactMessaging(props: ClientSideContactMessa
         }
     }
 
+
+
     return (
         <div className="bg-gray-800 flex flex-col h-[86%] w-full rounded-lg p-6 mt-2">
             {/* Message List */}
             <div ref={scrollbar} className="lg:flex-grow container lg:min-h-[34rem] lg:max-h-[34rem] min-h-[20rem] max-h-[20rem] overflow-y-auto overflow-x-hidden p-2 bg-gray-900 rounded-lg scroll-smooth message-scroll">
                 {messages.map((message, index) => (
-                    <Message key={index} index={index} changeMessage={changeMessage} message={message} contactId={props.contactId} />
+                    <Message key={index} index={index} changeMessage={changeMessage} deleteMessage={deleteMessage} message={message} contactId={props.contactId} />
                 ))}
                 {isTyping && (
                     <div className="text-gray-400 italic mt-2">{props.contactName} is typing...</div>
