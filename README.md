@@ -1,4 +1,4 @@
-# [text.ai](https://textai.rageave.xyz/)
+# text.ai
 
 Welcome to **text.ai**, an AI-powered text messaging platform! Using text.ai, you can create custom AI chat personas to respond to text messages in a human-like manner. **This was built in a day, as a hobby project.**
 
